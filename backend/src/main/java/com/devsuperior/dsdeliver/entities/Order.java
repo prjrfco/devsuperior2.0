@@ -30,11 +30,11 @@ public class Order implements Serializable {
     private OrderStatus status;
 
     //  Set não aceita repetição de um mesmo produto dentro de um mesmo pedido
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_order_product",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Set<Product> products = new HashSet<>();
+    private Set<Product> products = new HashSet<Product>();
 
     public Order() {
     }
@@ -47,4 +47,5 @@ public class Order implements Serializable {
         this.moment = moment;
         this.status = status;
     }
+
 }
