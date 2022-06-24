@@ -1,5 +1,5 @@
 .dropdown-container {
-  width: 300px;
+  width: 330px;
   border-radius: 10px;
   background-color: var(--primary-color);
   display: flex;
@@ -45,8 +45,13 @@
 }
 
 .dropdown-item {
-  margin: 5px;
-  padding-left: 10px;
+  /* margin: 5px; */
+  padding: 5px 5px 5px 15px;
+}
+
+.dropdown-item:hover {
+  background-color: #ececec;
+  cursor: pointer;
 }
 
 #touch {
@@ -55,6 +60,7 @@
   height: 0px;
   height: 100%;
   width: 100%;
+  cursor: pointer;
 }
 
 #touch:checked + .dropdown-options {
@@ -64,6 +70,12 @@
   height: auto;
 
   background-color: #ffffff;
+  z-index: 999999;
+
+  box-sizing: border-box;
+
+  -webkit-box-shadow: 1px 3px 8px 5px rgba(140, 140, 140, 0.5);
+  box-shadow: 1px 3px 8px 5px rgba(140, 140, 140, 0.5);
 }
 
 .container-arrow {

@@ -24,7 +24,8 @@ const Input: React.FC<Props> = ({ label, value, onChange }) => {
         <input
           type="input"
           className="input__field"
-          name={label}
+          placeholder={label}
+          // name={label}
           id={label}
           value={value}
           onChange={(e) => onChange(e)}
