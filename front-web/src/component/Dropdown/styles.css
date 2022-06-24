@@ -54,6 +54,15 @@
   cursor: pointer;
 }
 
+.dropdown-item > span {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: -0.015em;
+  color: var(--primary-color);
+  text-align: center;
+}
+
 #touch {
   position: absolute;
   opacity: 0;
