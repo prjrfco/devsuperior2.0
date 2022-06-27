@@ -1,21 +1,21 @@
 export type Product = {
-    id: number;
-    name: string;
-    price: number;
-    description: string;
-    imageUri: string;
-}
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  imageUri?: string;
+};
 
 export type OrderLocationData = {
-    address: string;
-    latitude: number;
-    longitude: number;
-}
+  address: string;
+  latitude: number;
+  longitude: number;
+};
 
 type ProductId = {
-    id: number;
-}
+  id: number;
+};
 
 export type OrderPayLoad = {
-    products: ProductId[];
+  products: ProductId[];
 } & OrderLocationData;
