@@ -1,16 +1,16 @@
 package com.devsuperior.dsdeliver.entities;
 
 public enum ProductTypeEnum {
-    PIZZA, SANDUICHE,
+    PIZZA, SANDUICHES,
     ACOMPANHAMENTOS,
-    REFRIGERANTES,
+    BEBIDAS,
     MILK_SHAKES,
     COMBOS,
     SUSHI,
     PASTEL,
     KIKAO,
     MASSAS,
-    RISOTOS,
+    RISOTO,
     CHURRASCO,
     GELADOS
 }
