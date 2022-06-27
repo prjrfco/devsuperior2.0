@@ -4,7 +4,7 @@ import { ReactComponent as ArrowDown } from "../../arrow-down.svg";
 
 import "./styles.css";
 
-type Categories =
+export type Categories =
   | "PIZZA"
   | "SANDUICHES"
   | "ACOMPANHAMENTOS"
@@ -19,7 +19,7 @@ type Categories =
   | "CHURRASCO"
   | "GELADOS";
 
-interface CategoryElement {
+export interface CategoryElement {
   label: string;
   category: Categories;
 }
@@ -28,7 +28,7 @@ export type CategoryMap = {
   [name in Categories]: CategoryElement;
 };
 
-const categoriesMap: CategoryMap = {
+export const categoriesMap: CategoryMap = {
   ACOMPANHAMENTOS: { category: "ACOMPANHAMENTOS", label: "Acompanhamentos" },
   CHURRASCO: { category: "CHURRASCO", label: "Churrascos" },
   COMBOS: { category: "COMBOS", label: "Combos" },
@@ -44,23 +44,15 @@ const categoriesMap: CategoryMap = {
   RISOTO: { category: "RISOTO", label: "Risotos" },
 };
 
-interface DropdownResponse {
-  data: { type: Categories }[];
+interface Props {
+  value: string | null;
+  onChange: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  options: CategoryElement[];
 }
 
-const Dropdown: React.FC = () => {
-  const [value, setValue] = useState<string | null>(null);
+const Dropdown: React.FC<Props> = ({ options, value, onChange }) => {
+  // const [value, setValue] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
-
-  const [optionsDropdown, setOptionsDropdown] = useState<CategoryElement[]>([]);
-
-  useEffect(() => {
-    fetchDropdownOptions().then(({ data }: DropdownResponse) => {
-      const options = data.map((d) => d.type);
-
-      setOptionsDropdown(options.map((type) => categoriesMap[type]));
-    });
-  }, []);
 
   return (
     <div className="dropdown-container">
@@ -79,12 +71,12 @@ const Dropdown: React.FC = () => {
         }}
       />
       <ul className="dropdown-options">
-        {optionsDropdown.length > 0 ? (
-          optionsDropdown.map((option) => (
+        {options.length > 0 ? (
+          options.map((option) => (
             <li
               className="dropdown-item"
               onClick={(e) => {
-                setValue(e.currentTarget.textContent);
+                onChange(e);
                 setExpanded(false);
               }}
             >

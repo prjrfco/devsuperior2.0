@@ -1,23 +1,38 @@
 import React from "react";
-import Dropdown from "../component/Dropdown";
+import Dropdown, { CategoryElement } from "../component/Dropdown";
 import Input from "../component/Input";
 
 interface Props {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  valueInput: string;
+  onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  valueDropdown: string | null;
+  onChangeDropdown: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  optionsDropdown: CategoryElement[];
 }
 
-function FilterComponent({ value, onChange }: Props) {
+function FilterComponent({
+  valueInput,
+  onChangeInput,
+
+  valueDropdown,
+  onChangeDropdown,
+  optionsDropdown,
+}: Props) {
   return (
     <div className="container-filter">
       <div className="content-filter">
         <span className="label-filter">FILTROS</span>
-        <Dropdown />
+        <Dropdown
+          value={valueDropdown}
+          onChange={onChangeDropdown}
+          options={optionsDropdown}
+        />
         <div className="container-input">
           <Input
             label="Buscar o produto"
-            value={value}
-            onChange={(e) => onChange(e)}
+            value={valueInput}
+            onChange={(e) => onChangeInput(e)}
           />
         </div>
       </div>

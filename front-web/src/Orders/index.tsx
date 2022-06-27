@@ -4,12 +4,21 @@ import StepsHeader from "./StepsHeader";
 import FilterComponent from "./FilterComponent";
 import ProductsList from "./ProductsList";
 import { OrderLocationData, Product } from "./types";
-import { fetchProducts, saveOrder } from "../api";
+import { fetchDropdownOptions, fetchProducts, saveOrder } from "../api";
 import OrderLocation from "./OrderLocation";
 import OrderSummary from "./OrderSummary";
 import Footer from "../Footer";
 import { checkIsSelected } from "./helpers";
 import "./styles.css";
+import {
+  Categories,
+  categoriesMap,
+  CategoryElement,
+} from "../component/Dropdown";
+
+interface DropdownResponse {
+  data: { type: Categories }[];
+}
 
 function Orders() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -17,6 +26,10 @@ function Orders() {
   const [orderLocation, setOrderLocation] = useState<OrderLocationData>();
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [filtered, setFiltered] = useState<Product[]>([]);
+
+  const [optionsDropdown, setOptionsDropdown] = useState<CategoryElement[]>([]);
+  const [value, setValue] = useState<string | null>(null);
+
   const totalPrice = selectedProducts.reduce((sum, item) => {
     return sum + item.price;
   }, 0);
@@ -29,6 +42,16 @@ function Orders() {
       })
       .catch(() => {
         toast.warning("Erro ao listar produtos");
+      });
+
+    fetchDropdownOptions()
+      .then(({ data }: DropdownResponse) => {
+        const options = data.map((d) => d.type);
+
+        setOptionsDropdown(options.map((type) => categoriesMap[type]));
+      })
+      .catch(() => {
+        toast.warning("Erro ao carregar dropdown de categorias");
       });
   }, []);
 
@@ -89,15 +112,22 @@ function Orders() {
     [products]
   );
 
+  useEffect(() => {}, []);
+
   return (
     <>
       <div className="orders-container">
         <StepsHeader />
         <FilterComponent
-          value={globalFilter}
-          onChange={(e) => {
+          valueInput={globalFilter}
+          onChangeInput={(e) => {
             setGlobalFilter(e.target.value);
             filterData(e.target.value);
+          }}
+          optionsDropdown={optionsDropdown}
+          valueDropdown={value}
+          onChangeDropdown={(e) => {
+            setValue(e.currentTarget.textContent);
           }}
         />
         <ProductsList
