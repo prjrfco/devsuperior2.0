@@ -2,6 +2,7 @@ package com.devsuperior.dsdeliver.services;
 
 import com.devsuperior.dsdeliver.dto.ProductDTO;
 import com.devsuperior.dsdeliver.entities.Product;
+import com.devsuperior.dsdeliver.entities.ProductTypeEnum;
 import com.devsuperior.dsdeliver.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public List<ProductDTO> dropdown() {
-        List<Product> list = repository.findAllTypeAsc();
-        return list.stream().map(p -> new ProductDTO(p.getType())).collect(Collectors.toList());
+        List<ProductTypeEnum> list = repository.findAllTypeAsc();
+        return list.stream().map(ProductDTO::new).collect(Collectors.toList());
     }
 }

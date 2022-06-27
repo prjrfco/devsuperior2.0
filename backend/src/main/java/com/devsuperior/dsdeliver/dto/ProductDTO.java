@@ -2,11 +2,13 @@ package com.devsuperior.dsdeliver.dto;
 
 import com.devsuperior.dsdeliver.entities.Product;
 import com.devsuperior.dsdeliver.entities.ProductTypeEnum;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
