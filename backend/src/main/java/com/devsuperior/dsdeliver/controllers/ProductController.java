@@ -22,4 +22,10 @@ public class ProductController {
         List<ProductDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
+
+    @GetMapping(value = "/dropdown")
+    public ResponseEntity<List<ProductDTO>> findAllType() {
+        List<ProductDTO> list = service.dropdown();
+        return ResponseEntity.ok().body(list);
+    }
 }

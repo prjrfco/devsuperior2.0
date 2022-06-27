@@ -21,4 +21,10 @@ public class ProductService {
         List<Product> list = repository.findAllByOrderByNameAsc();
         return list.stream().map(ProductDTO::new).collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<ProductDTO> dropdown() {
+        List<Product> list = repository.findAllTypeAsc();
+        return list.stream().map(p -> new ProductDTO(p.getType())).collect(Collectors.toList());
+    }
 }

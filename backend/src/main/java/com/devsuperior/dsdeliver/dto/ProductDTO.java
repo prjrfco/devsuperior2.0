@@ -38,4 +38,8 @@ public class ProductDTO implements Serializable {
         description = entity.getDescription();
         imageUri = entity.getImageUri();
     }
+
+    public ProductDTO(ProductTypeEnum type) {
+        this.type = type;
+    }
 }
