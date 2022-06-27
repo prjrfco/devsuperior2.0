@@ -1,20 +1,21 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { fetchDropdownOptions } from "../../api";
 import { ReactComponent as ArrowDown } from "../../arrow-down.svg";
 
 import "./styles.css";
 
 type Categories =
   | "PIZZA"
-  | "SANDUICHE"
+  | "SANDUICHES"
   | "ACOMPANHAMENTOS"
-  | "REFRIGERANTES"
+  | "BEBIDAS"
   | "MILK_SHAKES"
   | "COMBOS"
   | "SUSHI"
   | "PASTEL"
   | "KIKAO"
   | "MASSAS"
-  | "RISOTOS"
+  | "RISOTO"
   | "CHURRASCO"
   | "GELADOS";
 
@@ -23,7 +24,7 @@ interface CategoryElement {
   category: Categories;
 }
 
-type CategoryMap = {
+export type CategoryMap = {
   [name in Categories]: CategoryElement;
 };
 
@@ -37,34 +38,29 @@ const categoriesMap: CategoryMap = {
   MILK_SHAKES: { category: "MILK_SHAKES", label: "Milk Shakes" },
   PASTEL: { category: "PASTEL", label: "Pasteis" },
   PIZZA: { category: "PIZZA", label: "Pizzas" },
-  REFRIGERANTES: { category: "REFRIGERANTES", label: "Refrigerantes" },
-  SANDUICHE: { category: "SANDUICHE", label: "Sanduíches" },
+  BEBIDAS: { category: "BEBIDAS", label: "Bebidas" },
+  SANDUICHES: { category: "SANDUICHES", label: "Sanduíches" },
   SUSHI: { category: "SUSHI", label: "Sushis" },
-  RISOTOS: { category: "RISOTOS", label: "Risotos" },
+  RISOTO: { category: "RISOTO", label: "Risotos" },
 };
+
+interface DropdownResponse {
+  data: { type: Categories }[];
+}
 
 const Dropdown: React.FC = () => {
   const [value, setValue] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
 
-  const optionsDropdown: CategoryElement[] = useMemo(
-    () => [
-      categoriesMap.ACOMPANHAMENTOS,
-      categoriesMap.CHURRASCO,
-      categoriesMap.COMBOS,
-      categoriesMap.GELADOS,
-      categoriesMap.KIKAO,
-      categoriesMap.MASSAS,
-      categoriesMap.MILK_SHAKES,
-      categoriesMap.PASTEL,
-      categoriesMap.PIZZA,
-      categoriesMap.REFRIGERANTES,
-      categoriesMap.RISOTOS,
-      categoriesMap.SANDUICHE,
-      categoriesMap.SUSHI,
-    ],
-    []
-  );
+  const [optionsDropdown, setOptionsDropdown] = useState<CategoryElement[]>([]);
+
+  useEffect(() => {
+    fetchDropdownOptions().then(({ data }: DropdownResponse) => {
+      const options = data.map((d) => d.type);
+
+      setOptionsDropdown(options.map((type) => categoriesMap[type]));
+    });
+  }, []);
 
   return (
     <div className="dropdown-container">
