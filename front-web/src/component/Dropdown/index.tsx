@@ -7,15 +7,16 @@ type Categories =
   | "PIZZA"
   | "SANDUICHE"
   | "ACOMPANHAMENTOS"
-  | "REFRIGENTES"
+  | "REFRIGERANTES"
   | "MILK_SHAKES"
   | "COMBOS"
   | "SUSHI"
   | "PASTEL"
   | "KIKAO"
   | "MASSAS"
+  | "RISOTOS"
   | "CHURRASCO"
-  | "GELADO";
+  | "GELADOS";
 
 interface CategoryElement {
   label: string;
@@ -30,15 +31,16 @@ const categoriesMap: CategoryMap = {
   ACOMPANHAMENTOS: { category: "ACOMPANHAMENTOS", label: "Acompanhamentos" },
   CHURRASCO: { category: "CHURRASCO", label: "Churrascos" },
   COMBOS: { category: "COMBOS", label: "Combos" },
-  GELADO: { category: "GELADO", label: "Gelados" },
+  GELADOS: { category: "GELADOS", label: "Gelados" },
   KIKAO: { category: "KIKAO", label: "Kikães" },
   MASSAS: { category: "MASSAS", label: "Massas" },
   MILK_SHAKES: { category: "MILK_SHAKES", label: "Milk Shakes" },
   PASTEL: { category: "PASTEL", label: "Pasteis" },
   PIZZA: { category: "PIZZA", label: "Pizzas" },
-  REFRIGENTES: { category: "REFRIGENTES", label: "Refrigerantes" },
+  REFRIGERANTES: { category: "REFRIGERANTES", label: "Refrigerantes" },
   SANDUICHE: { category: "SANDUICHE", label: "Sanduíches" },
   SUSHI: { category: "SUSHI", label: "Sushis" },
+  RISOTOS: { category: "RISOTOS", label: "Risotos" },
 };
 
 const Dropdown: React.FC = () => {
@@ -50,13 +52,14 @@ const Dropdown: React.FC = () => {
       categoriesMap.ACOMPANHAMENTOS,
       categoriesMap.CHURRASCO,
       categoriesMap.COMBOS,
-      categoriesMap.GELADO,
+      categoriesMap.GELADOS,
       categoriesMap.KIKAO,
       categoriesMap.MASSAS,
       categoriesMap.MILK_SHAKES,
       categoriesMap.PASTEL,
       categoriesMap.PIZZA,
-      categoriesMap.REFRIGENTES,
+      categoriesMap.REFRIGERANTES,
+      categoriesMap.RISOTOS,
       categoriesMap.SANDUICHE,
       categoriesMap.SUSHI,
     ],
@@ -97,56 +100,6 @@ const Dropdown: React.FC = () => {
             <span>Não há categorias</span>
           </li>
         )}
-        {/* <li
-          className="dropdown-item"
-          onClick={(e) => setValue(e.currentTarget.textContent)}
-        >
-          <span>PIZZA</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>SANDUICHE</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>ACOMPANHAMENTOS</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>REFRIGENTES</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>REFRIGENTES</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>MILK_SHAKES</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>SUSHI</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>PASTEL</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>KIKAO</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>MASSAS</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>CHURRASCO</span>
-        </li>
-
-        <li className="dropdown-item">
-          <span>GELADOS</span>
-        </li> */}
       </ul>
     </div>
   );

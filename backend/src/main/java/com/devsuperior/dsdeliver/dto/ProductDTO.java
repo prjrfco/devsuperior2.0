@@ -1,6 +1,7 @@
 package com.devsuperior.dsdeliver.dto;
 
 import com.devsuperior.dsdeliver.entities.Product;
+import com.devsuperior.dsdeliver.entities.ProductTypeEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ public class ProductDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    private ProductTypeEnum type;
     private String name;
     private Double price;
     private String description;
@@ -19,8 +21,9 @@ public class ProductDTO implements Serializable {
     public ProductDTO() {
     }
 
-    public ProductDTO(Long id, String name, Double price, String description, String imageUri) {
+    public ProductDTO(Long id, ProductTypeEnum type, String name, Double price, String description, String imageUri) {
         this.id = id;
+        this.type = type;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -29,6 +32,7 @@ public class ProductDTO implements Serializable {
 
     public ProductDTO(Product entity) {
         id = entity.getId();
+        type = entity.getType();
         name = entity.getName();
         price = entity.getPrice();
         description = entity.getDescription();

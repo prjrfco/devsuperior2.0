@@ -1,9 +1,13 @@
-import { useState } from "react";
+import React from "react";
 import Dropdown from "../component/Dropdown";
 import Input from "../component/Input";
 
-function FilterComponent() {
-  const [globalFilter, setGlobalFilter] = useState<string>("");
+interface Props {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function FilterComponent({ value, onChange }: Props) {
   return (
     <div className="container-filter">
       <div className="content-filter">
@@ -12,8 +16,8 @@ function FilterComponent() {
         <div className="container-input">
           <Input
             label="Buscar o produto"
-            value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value)}
+            value={value}
+            onChange={(e) => onChange(e)}
           />
         </div>
       </div>

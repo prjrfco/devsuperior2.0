@@ -1,6 +1,7 @@
 package com.devsuperior.dsdeliver.entities;
 
 import lombok.Data;
+import net.bytebuddy.implementation.bind.annotation.Default;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,11 +25,15 @@ public class Product implements Serializable {
 
     private String imageUri;
 
+    @Enumerated(EnumType.STRING)
+    private ProductTypeEnum type;
+
     public Product() {
     }
 
-    public Product(Long id, String name, Double price, String description, String imageUri) {
+    public Product(Long id, ProductTypeEnum type, String name, Double price, String description, String imageUri) {
         this.id = id;
+        this.type = type;
         this.name = name;
         this.price = price;
         this.description = description;
