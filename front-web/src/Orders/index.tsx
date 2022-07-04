@@ -28,7 +28,7 @@ function Orders() {
   const [filtered, setFiltered] = useState<Product[]>([]);
 
   const [optionsDropdown, setOptionsDropdown] = useState<CategoryElement[]>([]);
-  const [value, setValue] = useState<CategoryElement | undefined>();
+  const [value, setValue] = useState<string | null>(null);
 
   const totalPrice = selectedProducts.reduce((sum, item) => {
     return sum + item.price;
@@ -91,45 +91,28 @@ function Orders() {
         setFiltered(
           products.filter((p) => {
             return (
-              (p.description
+              p.description
                 .toString()
                 .toLowerCase()
                 .includes(filter.toLowerCase()) ||
-                p.name
-                  .toString()
-                  .toLowerCase()
-                  .includes(filter.toLowerCase())) &&
-              (typeof value === "undefined" ? true : p.type === value?.category)
+              p.name.toString().toLowerCase().includes(filter.toLowerCase())
             );
           })
+
+          // modules.user.modules.filter((d) => {
+          //   console.log(d.pretty_name);
+          //   return d.pretty_name
+          //     .toString()
+          //     .toLowerCase()
+          //     .includes(filter.toLowerCase());
+          // })
         );
       }
     },
-    [products, value]
+    [products]
   );
 
-  const filterDataWithDropdown = useCallback(
-    (filter: string) => {
-      if (products) {
-        setFiltered(
-          products.filter((p) => {
-            return (
-              (p.description
-                .toString()
-                .toLowerCase()
-                .includes(globalFilter.toLowerCase()) ||
-                p.name
-                  .toString()
-                  .toLowerCase()
-                  .includes(globalFilter.toLowerCase())) &&
-              p.type === filter
-            );
-          })
-        );
-      }
-    },
-    [products, globalFilter]
-  );
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -142,15 +125,9 @@ function Orders() {
             filterData(e.target.value);
           }}
           optionsDropdown={optionsDropdown}
-          valueDropdown={value?.label || ""}
+          valueDropdown={value}
           onChangeDropdown={(e) => {
-            let optionSelected = optionsDropdown.find(
-              (o) => o.label === e.currentTarget.textContent
-            );
-            if (optionSelected) {
-              setValue(optionSelected);
-              filterDataWithDropdown(optionSelected.category);
-            }
+            setValue(e.currentTarget.textContent);
           }}
         />
         <ProductsList
