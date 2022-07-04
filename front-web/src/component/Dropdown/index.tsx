@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { fetchDropdownOptions } from "../../api";
+import React, { useState } from "react";
 import { ReactComponent as ArrowDown } from "../../arrow-down.svg";
 
 import "./styles.css";
