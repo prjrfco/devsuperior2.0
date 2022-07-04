@@ -4,6 +4,7 @@ import { ReactComponent as ArrowDown } from "../../arrow-down.svg";
 import "./styles.css";
 
 export type Categories =
+  | "TODOS"
   | "PIZZA"
   | "SANDUICHES"
   | "ACOMPANHAMENTOS"
@@ -28,6 +29,7 @@ export type CategoryMap = {
 };
 
 export const categoriesMap: CategoryMap = {
+  TODOS: { category: "TODOS", label: "Todos os produtos" },
   ACOMPANHAMENTOS: { category: "ACOMPANHAMENTOS", label: "Acompanhamentos" },
   CHURRASCO: { category: "CHURRASCO", label: "Churrascos" },
   COMBOS: { category: "COMBOS", label: "Combos" },

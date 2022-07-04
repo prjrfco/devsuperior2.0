@@ -46,6 +46,7 @@ function Orders() {
 
     fetchDropdownOptions()
       .then(({ data }: DropdownResponse) => {
+        data.push({ type: "TODOS" });
         const options = data.map((d) => d.type);
 
         setOptionsDropdown(options.map((type) => categoriesMap[type]));
@@ -90,17 +91,29 @@ function Orders() {
       if (products) {
         setFiltered(
           products.filter((p) => {
-            return (
-              (p.description
-                .toString()
-                .toLowerCase()
-                .includes(filter.toLowerCase()) ||
-                p.name
+            if (value?.category !== "TODOS") {
+              return (
+                (p.description
                   .toString()
                   .toLowerCase()
-                  .includes(filter.toLowerCase())) &&
-              (typeof value === "undefined" ? true : p.type === value?.category)
-            );
+                  .includes(filter.toLowerCase()) ||
+                  p.name
+                    .toString()
+                    .toLowerCase()
+                    .includes(filter.toLowerCase())) &&
+                (typeof value === "undefined"
+                  ? true
+                  : p.type === value?.category)
+              );
+            } else {
+              return (
+                p.description
+                  .toString()
+                  .toLowerCase()
+                  .includes(filter.toLowerCase()) ||
+                p.name.toString().toLowerCase().includes(filter.toLowerCase())
+              );
+            }
           })
         );
       }
@@ -113,16 +126,28 @@ function Orders() {
       if (products) {
         setFiltered(
           products.filter((p) => {
+            if (filter !== "TODOS") {
+              return (
+                (p.description
+                  .toString()
+                  .toLowerCase()
+                  .includes(globalFilter.toLowerCase()) ||
+                  p.name
+                    .toString()
+                    .toLowerCase()
+                    .includes(globalFilter.toLowerCase())) &&
+                p.type === filter
+              );
+            }
             return (
-              (p.description
+              p.description
                 .toString()
                 .toLowerCase()
                 .includes(globalFilter.toLowerCase()) ||
-                p.name
-                  .toString()
-                  .toLowerCase()
-                  .includes(globalFilter.toLowerCase())) &&
-              p.type === filter
+              p.name
+                .toString()
+                .toLowerCase()
+                .includes(globalFilter.toLowerCase())
             );
           })
         );
